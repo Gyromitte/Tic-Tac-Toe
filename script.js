@@ -13,6 +13,13 @@ function gameBoard(Xmarks, Omarks){
     }
 }
 
+const playerFactory = (nick, marker, choices) => { 
+    return {nick, marker, choices};
+}
+
+const firstPlayer = playerFactory('Gyromitte', "X", choices = [1, 4, 7]);
+
+console.log(firstPlayer.choices);
 gameBoard = new gameBoard(3, 2);
 gameBoard.getGameboard();
 
