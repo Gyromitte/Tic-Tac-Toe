@@ -1,0 +1,23 @@
+body{
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: #DEFFF2;
+    font-family: 'Gemunu Libre', sans-serif;
+}
+#board{
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 450px;
+    height: 450px;
+}
+.square{
+    display: flex;
+    border: 1px solid #000009;
+    width: 148px;
+    height: 148px;
+}
