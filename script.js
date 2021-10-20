@@ -1,4 +1,4 @@
-const board = document.getElementById('board');
+var theGameBoard = document.getElementById('board');
 
 var square = document.querySelectorAll('.square').forEach(square =>{
     square.addEventListener('click', e=>{
@@ -12,12 +12,17 @@ const playerFactory = (nick, marker, choices) => {
     return {nick, marker, choices};
 }
 
-const firstPlayer = playerFactory('Gyromitte', "X", choices = [7, 4, 1]);
-const secondPlayer = playerFactory('CPU', "O", choices = [2, 5, 8]);
+const firstPlayer = playerFactory('Gyromitte', "X", choices = []);
+const secondPlayer = playerFactory('CPU', "O", choices = []);
 
 function gameBoard(){
     let board = [1,2,3,4,5,6,7,8,9];
     this.getGameboard = function(){
+        let i = 0;
+        document.querySelectorAll('.square').forEach(square =>{
+        square.id = i;
+        i++
+        });
         let fixBoard =  [board[0], + board[1], + board[2], + "\n" +
                         board[3], + board[4], + board[5], + "\n" +
                         board[6], + board[7], + board[8]];
