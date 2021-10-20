@@ -1,39 +1,25 @@
 var theGameBoard = document.getElementById('board');
 
-var square = document.querySelectorAll('.square').forEach(square =>{
-    square.addEventListener('click', e=>{
-        square.textContent = "X";
-    });
-});
-
-
-
-const playerFactory = (nick, marker, choices) => { 
-    return {nick, marker, choices};
-}
-
-const firstPlayer = playerFactory('Gyromitte', "X", choices = []);
-const secondPlayer = playerFactory('CPU', "O", choices = []);
+var square = document.querySelectorAll('.square');
 
 function gameBoard(){
-    let board = [1,2,3,4,5,6,7,8,9];
+    let board = [0,1,2,3,4,5,6,7,8];
     this.getGameboard = function(){
         let i = 0;
         document.querySelectorAll('.square').forEach(square =>{
         square.id = i;
         i++
         });
-        let fixBoard =  [board[0], + board[1], + board[2], + "\n" +
-                        board[3], + board[4], + board[5], + "\n" +
-                        board[6], + board[7], + board[8]];
-        return fixBoard;
+        return board;
     }
 }
 
+theGameBoard = new gameBoard();
+theGameBoard.getGameboard();
+
 function gameFlow(firstPlayerChoices, secondPlayerChoices){
     this.showDecisions = function(){
-        let newBoard = theGameBoard.getGameboard();
-
+        let newBoard = theGameBoard.getGameboard(); 
         function displayMarkers(choices, marker){
             //Iterate trough the player choices
             for(var i=0;  i < choices.length; i++){
@@ -43,17 +29,32 @@ function gameFlow(firstPlayerChoices, secondPlayerChoices){
                 }   
             }
         }
-        
         displayMarkers(firstPlayerChoices, "x");
-        displayMarkers(secondPlayerChoices, "o");
         return console.log(newBoard);
     }
 }
 
+const playerFactory = (nick, marker, choices) => { 
+    document.querySelectorAll('.square').forEach(square =>{
+        square.addEventListener('click', e=>{
+            square.textContent = "X";
+            choices.push(parseInt(square.id));
+            console.log(choices);
+        });
+    });   
+    return {nick, marker, choices};
+}
 
-theGameBoard = new gameBoard();
-theGameBoard.getGameboard();
+const firstPlayer = playerFactory('Gyromitte', "X", choices = []);
+theGameFlow = new gameFlow(firstPlayer.choices);
+document.querySelectorAll('.square').forEach(square =>{
+    square.addEventListener('click', e=>{
+        theGameFlow.showDecisions();
+    });
+});   
 
-theGameFlow = new gameFlow(firstPlayer.choices, secondPlayer.choices);
-theGameFlow.showDecisions();
+
+
+
+
 
