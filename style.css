@@ -4,7 +4,7 @@ body{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background: #DEFFF2;
+    background: #AEF3E7;
     font-family: 'Gemunu Libre', sans-serif;
 }
 #board{
@@ -17,7 +17,15 @@ body{
 }
 .square{
     display: flex;
-    border: 1px solid #000009;
+    border: 1px solid #254E70;
     width: 148px;
     height: 148px;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    color: #37718E;
+    font-weight: bolder;
+}
+.square:hover{
+    background-color: #6da097;;
 }

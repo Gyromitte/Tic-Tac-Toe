@@ -1,3 +1,13 @@
+const board = document.getElementById('board');
+
+var square = document.querySelectorAll('.square').forEach(square =>{
+    square.addEventListener('click', e=>{
+        square.textContent = "X";
+    });
+});
+
+
+
 const playerFactory = (nick, marker, choices) => { 
     return {nick, marker, choices};
 }
