@@ -19,7 +19,6 @@ theGameBoard.getGameboard();
 const playerFactory = (state, marker, choices) => {
     return {state, marker, choices};
 }
-
 var firstPlayer = playerFactory(state = true, "X", choices = []);
     
 function gameFlow(firstPlayerChoices, state){
@@ -50,7 +49,6 @@ function gameFlow(firstPlayerChoices, state){
             //Iterate trough the player choices
             for(var i=0;  i < choices.length; i++){
                 if(theGameBoard.getGameboard().indexOf(choices[i]) !== -1){
-                    console.log(state);
                     //The board is modified to show markers in the correct positions 
                     newBoard.splice(theGameBoard.getGameboard().indexOf(choices[i]), 1, marker);
                 }   
