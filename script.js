@@ -1,6 +1,8 @@
 var theGameBoard = document.getElementById('board');
 var square = document.querySelectorAll('.square');
 
+const modal = document.getElementById('add-modal');
+
 function gameBoard(){
     let board = [0,1,2,3,4,5,6,7,8];
     this.getGameboard = function(){
@@ -21,7 +23,7 @@ const playerFactory = (state, marker, choices) => {
 }
 var firstPlayer = playerFactory(state = true, "X", choices = []);
     
-function gameFlow(firstPlayerChoices, state){
+function gameFlow(firstPlayerChoices, state, secondChoices){
     document.querySelectorAll('.square').forEach(square =>{
         square.addEventListener('click', e=>{
             switch (state){
@@ -44,22 +46,28 @@ function gameFlow(firstPlayerChoices, state){
     });
     this.showDecisions = function(){
         let newBoard = theGameBoard.getGameboard();
-        
         function displayMarkers(choices, marker){
             //Iterate trough the player choices
             for(var i=0;  i < choices.length; i++){
                 if(theGameBoard.getGameboard().indexOf(choices[i]) !== -1){
                     //The board is modified to show markers in the correct positions 
                     newBoard.splice(theGameBoard.getGameboard().indexOf(choices[i]), 1, marker);
+                    console.log(choices);
                 }   
             }
         }
-        displayMarkers(firstPlayerChoices, "x");
+                if (!state){
+                    displayMarkers(firstPlayerChoices, "x");
+                }
+                if(state){
+                    displayMarkers(secondChoices, "o");
+                }
+
         return console.log(newBoard);
     }
 }
 
-theGameFlow = new gameFlow(firstPlayer.choices, firstPlayer.state);
+theGameFlow = new gameFlow(firstPlayer.choices, firstPlayer.state, firstPlayer.choices);
 
 
 
