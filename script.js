@@ -61,7 +61,7 @@ function gameFlow(choices, state, secondChoices){
         let fixSecondChoices = secondChoices;
         function displayMarkers(choices, marker){
             //Iterate trough the player choices
-            if(state){
+            if(!state){
                 for(var i=0;  i < choices.length; i++){
                     if(theGameBoard.getGameboard().indexOf(choices[i]) !== -1){
                         //The board is modified to show markers in the correct positions 
@@ -69,7 +69,7 @@ function gameFlow(choices, state, secondChoices){
                     }   
                 }
             }
-            if(!state){
+            if(state){
                 for(var i=0;  i < fixSecondChoices.length; i++){
                     if(theGameBoard.getGameboard().indexOf(fixSecondChoices[i]) !== -1){
                         //The board is modified to show markers in the correct positions 
@@ -80,7 +80,7 @@ function gameFlow(choices, state, secondChoices){
 
         }
 
-            if (!state){
+            if(!state){
                     displayMarkers(choices, "X");
                     console.log(choices);
             }
