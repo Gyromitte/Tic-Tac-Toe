@@ -18,56 +18,81 @@ function gameBoard(){
 theGameBoard = new gameBoard();
 theGameBoard.getGameboard();
 
-const playerFactory = (state, marker, choices) => {
-    return {state, marker, choices};
+function playerFactory (state, marker, choices) {
+    this.choices = choices;
+    this.state = state;
+    this.marker = marker;
 }
-var firstPlayer = playerFactory(state = true, "X", choices = []);
+
+let firstPlayer =  Object.create(playerFactory);
+let secondPlayer =  Object.create(playerFactory);
+
+firstPlayer.state = true;
+firstPlayer.maker = "X";
+firstPlayer.choices = [];
+
+secondPlayer.state = false;
+secondPlayer.marker = "O";
+secondPlayer.choices = [];
+
     
-function gameFlow(firstPlayerChoices, state, secondChoices){
+function gameFlow(choices, state, secondChoices){
     document.querySelectorAll('.square').forEach(square =>{
         square.addEventListener('click', e=>{
             switch (state){
                 case true: 
                     state = false;
-                    console.log(state);
                     square.textContent = "X";
-                    choices.push(parseInt(square.id));
+                    firstPlayer.choices.push(parseInt(square.id));
                     theGameFlow.showDecisions();
                     break;
                 case false:
                     state = true;
-                    console.log(state);
                     square.textContent = "O";
-                    choices.push(parseInt(square.id));
+                    secondPlayer.choices.push(parseInt(square.id));
                     theGameFlow.showDecisions();
                     break;
             }
         });
     });
+
     this.showDecisions = function(){
         let newBoard = theGameBoard.getGameboard();
+        let fixSecondChoices = secondChoices;
         function displayMarkers(choices, marker){
             //Iterate trough the player choices
-            for(var i=0;  i < choices.length; i++){
-                if(theGameBoard.getGameboard().indexOf(choices[i]) !== -1){
-                    //The board is modified to show markers in the correct positions 
-                    newBoard.splice(theGameBoard.getGameboard().indexOf(choices[i]), 1, marker);
-                    console.log(choices);
-                }   
+            if(state){
+                for(var i=0;  i < choices.length; i++){
+                    if(theGameBoard.getGameboard().indexOf(choices[i]) !== -1){
+                        //The board is modified to show markers in the correct positions 
+                        newBoard.splice(theGameBoard.getGameboard().indexOf(choices[i]), 1, marker);
+                    }   
+                }
             }
-        }
-                if (!state){
-                    displayMarkers(firstPlayerChoices, "x");
+            if(!state){
+                for(var i=0;  i < fixSecondChoices.length; i++){
+                    if(theGameBoard.getGameboard().indexOf(fixSecondChoices[i]) !== -1){
+                        //The board is modified to show markers in the correct positions 
+                        newBoard.splice(theGameBoard.getGameboard().indexOf(fixSecondChoices[i]), 1, marker);
+                    }   
                 }
-                if(state){
-                    displayMarkers(secondChoices, "o");
-                }
+            }
 
+        }
+
+            if (!state){
+                    displayMarkers(choices, "X");
+                    console.log(choices);
+            }
+            if(state){
+                    displayMarkers(fixSecondChoices, "O");
+                    console.log(fixSecondChoices);
+            }
         return console.log(newBoard);
     }
 }
 
-theGameFlow = new gameFlow(firstPlayer.choices, firstPlayer.state, firstPlayer.choices);
+theGameFlow = new gameFlow(firstPlayer.choices, firstPlayer.state, secondPlayer.choices);
 
 
 
