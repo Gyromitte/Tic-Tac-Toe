@@ -1,6 +1,5 @@
 var theGameBoard = document.getElementById('board');
 var square = document.querySelectorAll('.square');
-
 const modal = document.getElementById('add-modal');
 
 function gameBoard(){
@@ -18,27 +17,24 @@ function gameBoard(){
 theGameBoard = new gameBoard();
 theGameBoard.getGameboard();
 
-function playerFactory (state, marker, choices) {
-    this.choices = choices;
-    this.state = state;
-    this.marker = marker;
+const createPlayers = {
+    init:  function(state, marker, choices){
+        this.state = state;
+        this.marker = marker;
+        this.choices = choices;
+    }
 }
 
-let firstPlayer =  Object.create(playerFactory);
-let secondPlayer =  Object.create(playerFactory);
+let firstPlayer =  Object.create(createPlayers);
+firstPlayer.init(true, "X", choices = []);
 
-firstPlayer.state = true;
-firstPlayer.maker = "X";
-firstPlayer.choices = [];
+let secondPlayer =  Object.create(createPlayers);
+secondPlayer.init(true, "O", choices = []);
 
-secondPlayer.state = false;
-secondPlayer.marker = "O";
-secondPlayer.choices = [];
-
-    
 function gameFlow(choices, state, secondChoices){
     document.querySelectorAll('.square').forEach(square =>{
         square.addEventListener('click', e=>{
+            //After every click the state will change to rotate the markers
             switch (state){
                 case true: 
                     state = false;
@@ -79,7 +75,6 @@ function gameFlow(choices, state, secondChoices){
             }
 
         }
-
             if(!state){
                     displayMarkers(choices, "X");
                     console.log(choices);
