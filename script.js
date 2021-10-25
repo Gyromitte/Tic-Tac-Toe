@@ -55,6 +55,26 @@ function gameFlow(choices, state, secondChoices){
     this.showDecisions = function(){
         let newBoard = theGameBoard.getGameboard();
         let fixSecondChoices = secondChoices;
+
+        function checkWinCondition(selections){
+
+            console.log(selections);
+            const winConditions = [
+                [0, 1, 2],[3, 4, 5],[6, 7, 8],[0, 3, 6],
+                [1, 4, 7],[2, 5, 8],[0, 4, 8],[2, 4, 6]
+            ];
+            
+            for(var i=0; i < winConditions.length; i++){      //You need at least 3 movements to win
+                if (selections.filter(function (elem) {
+                    return winConditions[i].indexOf(elem) > -1;
+                }).length == winConditions[i].length
+                ){
+                    console.log(winConditions[i]);
+                    console.log("Win!");
+                }
+            }
+        }
+
         function displayMarkers(choices, marker){
             //Iterate trough the player choices
             if(!state){
@@ -62,6 +82,7 @@ function gameFlow(choices, state, secondChoices){
                     if(theGameBoard.getGameboard().indexOf(choices[i]) !== -1){
                         //The board is modified to show markers in the correct positions 
                         newBoard.splice(theGameBoard.getGameboard().indexOf(choices[i]), 1, marker);
+                        checkWinCondition(choices);
                     }   
                 }
             }
@@ -77,22 +98,13 @@ function gameFlow(choices, state, secondChoices){
         }
             if(!state){
                     displayMarkers(choices, "X");
-                    console.log(choices);
             }
             if(state){
                     displayMarkers(fixSecondChoices, "O");
-                    console.log(fixSecondChoices);
             }
         return console.log(newBoard);
     }
+
 }
 
 theGameFlow = new gameFlow(firstPlayer.choices, firstPlayer.state, secondPlayer.choices);
-
-
-
-
-
-
-
-
