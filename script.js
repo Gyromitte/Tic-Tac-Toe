@@ -56,7 +56,7 @@ function gameFlow(choices, state, secondChoices){
         let newBoard = theGameBoard.getGameboard();
         let fixSecondChoices = secondChoices;
 
-        function checkWinCondition(selections){
+        function checkWinCondition(selections, marker){
 
             console.log(selections);
             const winConditions = [
@@ -70,7 +70,7 @@ function gameFlow(choices, state, secondChoices){
                 }).length == winConditions[i].length
                 ){
                     console.log(winConditions[i]);
-                    console.log("Win!");
+                    console.log("Win! to: "+marker);
                 }
             }
         }
@@ -82,7 +82,7 @@ function gameFlow(choices, state, secondChoices){
                     if(theGameBoard.getGameboard().indexOf(choices[i]) !== -1){
                         //The board is modified to show markers in the correct positions 
                         newBoard.splice(theGameBoard.getGameboard().indexOf(choices[i]), 1, marker);
-                        checkWinCondition(choices);
+                        checkWinCondition(choices, "X");
                     }   
                 }
             }
@@ -91,6 +91,7 @@ function gameFlow(choices, state, secondChoices){
                     if(theGameBoard.getGameboard().indexOf(fixSecondChoices[i]) !== -1){
                         //The board is modified to show markers in the correct positions 
                         newBoard.splice(theGameBoard.getGameboard().indexOf(fixSecondChoices[i]), 1, marker);
+                        checkWinCondition(choices, "O");
                     }   
                 }
             }
