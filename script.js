@@ -1,6 +1,7 @@
 var theGameBoard = document.getElementById('board');
 var square = document.querySelectorAll('.square');
 const modal = document.getElementById('add-modal');
+const modalContent = document.getElementById('modal-content');
 
 function gameBoard(){
     let board = [0,1,2,3,4,5,6,7,8];
@@ -63,12 +64,14 @@ function gameFlow(choices, state, secondChoices){
                 [0, 1, 2],[3, 4, 5],[6, 7, 8],[0, 3, 6],
                 [1, 4, 7],[2, 5, 8],[0, 4, 8],[2, 4, 6]
             ];
-            
-            for(var i=0; i < winConditions.length; i++){      //You need at least 3 movements to win
+            //TODO add a draw condiiton
+            for(var i=0; i < winConditions.length; i++){      
                 if (selections.filter(function (elem) {
                     return winConditions[i].indexOf(elem) > -1;
                 }).length == winConditions[i].length
-                ){
+                ){  
+                    modal.style.display = "flex";
+                    modalContent.textContent = marker + " Wins!";
                     console.log(winConditions[i]);
                     console.log("Win! to: "+marker);
                 }
