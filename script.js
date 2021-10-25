@@ -58,7 +58,7 @@ function gameFlow(choices, state, secondChoices){
         let fixSecondChoices = secondChoices;
 
         function checkWinCondition(selections, marker, newBoard){
-
+            let gameOver;
             console.log(selections);
             const winConditions = [
                 [0, 1, 2],[3, 4, 5],[6, 7, 8],[0, 3, 6],
@@ -74,8 +74,9 @@ function gameFlow(choices, state, secondChoices){
                     modalContent.textContent = marker + " Wins!";
                     console.log(winConditions[i]);
                     console.log("Win! to: "+ marker);
+                    gameOver = true;
                 }
-                if(newBoard.every(i => (typeof i === "string"))){
+                if(newBoard.every(i => (typeof i === "string") && !gameOver)){
                     modal.style.display = "flex";
                     modalContent.textContent = "It's a draw";
                 }
