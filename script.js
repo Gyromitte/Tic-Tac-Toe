@@ -57,7 +57,7 @@ function gameFlow(choices, state, secondChoices){
         let newBoard = theGameBoard.getGameboard();
         let fixSecondChoices = secondChoices;
 
-        function checkWinCondition(selections, marker){
+        function checkWinCondition(selections, marker, newBoard){
 
             console.log(selections);
             const winConditions = [
@@ -73,7 +73,11 @@ function gameFlow(choices, state, secondChoices){
                     modal.style.display = "flex";
                     modalContent.textContent = marker + " Wins!";
                     console.log(winConditions[i]);
-                    console.log("Win! to: "+marker);
+                    console.log("Win! to: "+ marker);
+                }
+                if(newBoard.every(i => (typeof i === "string"))){
+                    modal.style.display = "flex";
+                    modalContent.textContent = "It's a draw";
                 }
             }
         }
@@ -85,7 +89,7 @@ function gameFlow(choices, state, secondChoices){
                     if(theGameBoard.getGameboard().indexOf(choices[i]) !== -1){
                         //The board is modified to show markers in the correct positions 
                         newBoard.splice(theGameBoard.getGameboard().indexOf(choices[i]), 1, marker);
-                        checkWinCondition(choices, "X");
+                        checkWinCondition(choices, "X", newBoard);
                     }   
                 }
             }
@@ -94,7 +98,7 @@ function gameFlow(choices, state, secondChoices){
                     if(theGameBoard.getGameboard().indexOf(fixSecondChoices[i]) !== -1){
                         //The board is modified to show markers in the correct positions 
                         newBoard.splice(theGameBoard.getGameboard().indexOf(fixSecondChoices[i]), 1, marker);
-                        checkWinCondition(choices, "O");
+                        checkWinCondition(choices, "O", newBoard);
                     }   
                 }
             }
