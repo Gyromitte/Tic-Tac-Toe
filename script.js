@@ -50,7 +50,9 @@ function gameFlow(choices, state, secondChoices){
                     theGameFlow.showDecisions();
                     break;
             }
-        });
+
+        }, {once:true});
+       
     });
 
     this.showDecisions = function(){
