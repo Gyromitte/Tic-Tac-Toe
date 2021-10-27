@@ -62,11 +62,10 @@ function gameFlow(choices, state, secondChoices){
         function checkWinCondition(selections, marker, newBoard){
             let gameOver;
             console.log(selections);
-            const winConditions = [
-                [0, 1, 2],[3, 4, 5],[6, 7, 8],[0, 3, 6],
-                [1, 4, 7],[2, 5, 8],[0, 4, 8],[2, 4, 6]
-            ];
-            //TODO add a draw condiiton
+            const winConditions = 
+            [[0, 1, 2],[3, 4, 5],[6, 7, 8],[0, 3, 6],
+            [1, 4, 7],[2, 5, 8],[0, 4, 8],[2, 4, 6]];
+
             for(var i=0; i < winConditions.length; i++){      
                 if (selections.filter(function (elem) {
                     return winConditions[i].indexOf(elem) > -1;
@@ -99,7 +98,6 @@ function gameFlow(choices, state, secondChoices){
             if(state){
                 for(var i=0;  i < fixSecondChoices.length; i++){
                     if(theGameBoard.getGameboard().indexOf(fixSecondChoices[i]) !== -1){
-                        //The board is modified to show markers in the correct positions 
                         newBoard.splice(theGameBoard.getGameboard().indexOf(fixSecondChoices[i]), 1, marker);
                         checkWinCondition(choices, "O", newBoard);
                     }   

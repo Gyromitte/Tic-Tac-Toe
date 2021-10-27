@@ -27,10 +27,11 @@ body{
     font-weight: bolder;
 }
 .square:hover{
-    background-color: #6da097;;
+    background-color: #6da097;
 }
 #add-modal{
-    display: none;
+    display: flex;
+    flex-direction: column;
     position: fixed;
     z-index: 1;
     left: 0; 
@@ -55,4 +56,17 @@ body{
     background: #8EE3EF;
     font-size: 50px;
     font-weight: bolder;
+}
+#restart-button{
+    margin-top: 20px;
+    color: #C33C54;
+    background: #8EE3EF;
+    font-size: 30px;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    font-weight: bolder;
+}
+#restart-button:hover{
+    background: #517770;
 }
