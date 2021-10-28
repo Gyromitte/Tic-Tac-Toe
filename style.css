@@ -30,7 +30,7 @@ body{
     background-color: #6da097;
 }
 #add-modal{
-    display: flex;
+    display: none;
     flex-direction: column;
     position: fixed;
     z-index: 1;
