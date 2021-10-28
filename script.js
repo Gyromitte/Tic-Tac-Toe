@@ -33,31 +33,26 @@ firstPlayer.init(true, "X", choices = []);
 let secondPlayer =  Object.create(createPlayers);
 secondPlayer.init(true, "O", choices = []);
 
-
-
 function gameFlow(choices, state, secondChoices){
-
     function makeSquaresClickable(){
         document.querySelectorAll('.square').forEach(square =>{
             square.addEventListener('click', e=>{
                 //After every click the state will change to rotate the markers
                 switch (state){
-                    case true: 
+                    case true:
                         state = false;
                         square.textContent = "X";
-                        firstPlayer.choices.push(parseInt(square.id));
+                        choices.push(parseInt(square.id));
                         theGameFlow.showDecisions();
                         break;
                     case false:
                         state = true;
                         square.textContent = "O";
-                        secondPlayer.choices.push(parseInt(square.id));
+                        secondChoices.push(parseInt(square.id));
                         theGameFlow.showDecisions();
                         break;
                 }
-    
             }, {once:true});
-           
         });
     }
     makeSquaresClickable();
@@ -79,7 +74,6 @@ function gameFlow(choices, state, secondChoices){
                 ){  
                     modal.style.display = "flex";
                     modalContent.textContent = marker + " Wins!";
-                    console.log(state);
                     gameOver = true;
                 }
                 if(newBoard.every(i => (typeof i === "string") && !gameOver)){
@@ -98,7 +92,6 @@ function gameFlow(choices, state, secondChoices){
                         //The board is modified to show markers in the correct positions
                         newBoard.splice(theGameBoard.getGameboard().indexOf(choices[i]), 1, marker);
                         checkWinCondition(choices, "X", newBoard);
-                        console.log(choices);
                     }   
                 }
             }
@@ -107,7 +100,6 @@ function gameFlow(choices, state, secondChoices){
                     if(theGameBoard.getGameboard().indexOf(fixSecondChoices[i]) !== -1){
                         newBoard.splice(theGameBoard.getGameboard().indexOf(fixSecondChoices[i]), 1, marker);
                         checkWinCondition(choices, "O", newBoard);
-                        console.log(fixSecondChoices);
                     }   
                 }
             }
@@ -128,13 +120,15 @@ theGameFlow = new gameFlow(firstPlayer.choices, firstPlayer.state, secondPlayer.
 
 restartButton.addEventListener('click', e=>{
     modal.style.display = "none";
-    firstPlayer.choices = [];
-    secondPlayer.choices = [];
-    firstPlayer.state = false;
+    theGameBoard = new gameBoard();
+    theGameBoard.getGameboard();
+    let firstPlayer =  Object.create(createPlayers);
+    firstPlayer.init(true, "X", choices = []);
+    let secondPlayer =  Object.create(createPlayers);
+    secondPlayer.init(true, "O", choices = []);
+
     document.querySelectorAll('.square').forEach(square =>{
         square.textContent = "";
     });
-    theGameBoard = new gameBoard();
-    theGameBoard.getGameboard();
     theGameFlow = new gameFlow(firstPlayer.choices, firstPlayer.state, secondPlayer.choices);
 });
